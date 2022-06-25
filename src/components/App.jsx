@@ -1,8 +1,6 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 
-// import Input from './Input/Input';
-// import AddButton from './AddButton/AddButton';
 import ContactsList from './ContactsList/ContactsList';
 import ContactForm from './ContactForm/ContactForm';
 import SearchFilter from './SearchFilter/SearchFilter';
