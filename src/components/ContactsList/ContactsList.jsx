@@ -5,7 +5,7 @@ import ContactsListItem from '../ContactsListItem/ContactsListItem';
 
 class ContactsList extends Component {
   static propTypes = {
-    contacts: PropTypes.arrayOf(PropTypes.object),
+    contacts: PropTypes.arrayOf(PropTypes.object.isRequired),
     filter: PropTypes.string.isRequired,
   };
 
@@ -20,8 +20,10 @@ class ContactsList extends Component {
                 .includes(this.props.filter.toLowerCase()) && (
                 <ContactsListItem
                   key={contact.id}
+                  id={contact.id}
                   name={contact.name}
                   number={contact.number}
+                  removeContact={this.props.removeContact}
                 ></ContactsListItem>
               )
           )}
