@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import s from './ContactsListItem.module.css';
+import PropTypes from 'prop-types';
 
 class ContactsListItem extends Component {
+  static propTypes = {
+    removeContact: PropTypes.func.isRequired,
+  };
   render() {
     // console.log(this.props.removeContact);
     // console.log(this.props.key);
