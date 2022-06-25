@@ -58,7 +58,7 @@ class App extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 40,
+          fontSize: 30,
           color: '#010101',
         }}
       >
