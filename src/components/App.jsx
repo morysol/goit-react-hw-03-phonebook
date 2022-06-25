@@ -4,7 +4,8 @@ import { nanoid } from 'nanoid';
 // import Input from './Input/Input';
 // import AddButton from './AddButton/AddButton';
 import ContactsList from './ContactsList/ContactsList';
-import FormPhonebook from './FormPhonebook/FormPhonebook';
+import ContactForm from './ContactForm/ContactForm';
+import SearchFilter from './SearchFilter/SearchFilter';
 
 class App extends React.Component {
   state = {
@@ -15,18 +16,27 @@ class App extends React.Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   formSubmitedContacts = ({ name, number }) => {
+    let isExists = false;
+    this.state.contacts.forEach(el => {
+      if (el.name === name) {
+        isExists = true;
+      }
+    });
+
+    if (isExists) {
+      alert(` ${window.location.host} says: ${name}  is alredy in contacts.`);
+      return;
+    }
+
     this.setState({
-      name,
       contacts: [...this.state.contacts, { id: nanoid(), name, number }],
     });
   };
 
-  onSearchChange = e => {
+  onFilterChange = e => {
     this.setState({ filter: e.target.value });
   };
 
@@ -42,12 +52,18 @@ class App extends React.Component {
           color: '#010101',
         }}
       >
-        <FormPhonebook
-          onSubmitFormPhonebook={this.formSubmitedContacts}
-        ></FormPhonebook>
+        <h1>Phonebook</h1>
+        <ContactForm
+          onSubmitContactForm={this.formSubmitedContacts}
+        ></ContactForm>
+        <h2>Contacts</h2>
+        <SearchFilter
+          onFilterChange={this.onFilterChange}
+          filter={this.state.filter}
+        ></SearchFilter>
         <ContactsList
           contacts={this.state.contacts}
-          onSearchChange={this.onSearchChange}
+          filter={this.state.filter}
         ></ContactsList>
       </div>
     );
