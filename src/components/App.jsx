@@ -1,9 +1,11 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-
+//
 import ContactsList from './ContactsList/ContactsList';
 import ContactForm from './ContactForm/ContactForm';
 import SearchFilter from './SearchFilter/SearchFilter';
+//
+import { load, save } from '../tools/storage/storage';
 
 class App extends React.Component {
   state = {
@@ -16,15 +18,33 @@ class App extends React.Component {
     filter: '',
   };
 
-  formSubmitedContacts = ({ name, number }) => {
-    let isExists = false;
-    this.state.contacts.forEach(el => {
-      if (el.name === name) {
-        isExists = true;
+  componentDidMount() {
+    const localContacts = load('contacts');
+    if (localContacts) {
+      this.setState({ contacts: localContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // console.log('componentDidUpdate');
+    // console.dir(this.state.contacts);
+    save('contacts', this.state.contacts);
+  }
+
+  isContactExists = (list, value) => {
+    let state = false;
+    list.forEach(item => {
+      if (item.name === value) {
+        state = true;
       }
     });
+    return state;
+  };
 
-    if (isExists) {
+  formSubmitedContacts = ({ name, number }) => {
+    const ifExist = this.isContactExists(this.state.contacts, name);
+
+    if (ifExist) {
       alert(` ${window.location.host} says: ${name}  is alredy in contacts.`);
       return;
     }
