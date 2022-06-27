@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { nanoid } from 'nanoid';
 
-import s from './SearchFilter.module.css';
+import { SearchBox, Filter } from './SearchFilter.styled';
 
 class SearchFilter extends Component {
   static propTypes = {
@@ -13,9 +13,9 @@ class SearchFilter extends Component {
   idInputSearch = nanoid();
   render() {
     return (
-      <div className={s.input}>
+      <SearchBox>
         <label htmlFor={this.idInputSearch}>Find contacts by name</label>
-        <input
+        <Filter
           onChange={this.props.onFilterChange}
           id={this.idInputSearch}
           type="text"
@@ -25,7 +25,7 @@ class SearchFilter extends Component {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-      </div>
+      </SearchBox>
     );
   }
 }

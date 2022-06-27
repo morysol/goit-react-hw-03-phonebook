@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import s from './ContactsListItem.module.css';
 import PropTypes from 'prop-types';
+//
+import { BtnDelete } from './ContactsListItem.styled';
 
 class ContactsListItem extends Component {
   static propTypes = {
@@ -13,15 +14,14 @@ class ContactsListItem extends Component {
       <li key={this.props.id}>
         {' '}
         {this.props.name}: {this.props.number}
-        <button
-          className={s.button}
+        <BtnDelete
           type="button"
           onClick={() => {
             this.props.removeContact(this.props.id);
           }}
         >
           delete
-        </button>
+        </BtnDelete>
       </li>
     );
   }

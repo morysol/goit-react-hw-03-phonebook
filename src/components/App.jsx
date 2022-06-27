@@ -6,6 +6,7 @@ import ContactForm from './ContactForm/ContactForm';
 import SearchFilter from './SearchFilter/SearchFilter';
 //
 import { load, save } from '../tools/storage/storage';
+import { Container } from './App.styled';
 
 class App extends React.Component {
   state = {
@@ -72,16 +73,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 30,
-          color: '#010101',
-        }}
-      >
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm
           onSubmitContactForm={this.formSubmitedContacts}
@@ -96,7 +88,7 @@ class App extends React.Component {
           filter={this.state.filter}
           removeContact={this.onDeleteContact}
         ></ContactsList>
-      </div>
+      </Container>
     );
   }
 }
