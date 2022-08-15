@@ -26,10 +26,16 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps, prevState) {
     // console.log('componentDidUpdate');
     // console.dir(this.state.contacts);
-    save('contacts', this.state.contacts);
+    // console.log('prev  ', prevState.contacts);
+    // console.log('curr  ', this.state.contacts);
+    // console.log(prevState.contacts === this.state.contacts);
+
+    if (prevState.contacts !== this.state.contacts) {
+      save('contacts', this.state.contacts);
+    }
   }
 
   isContactExists = (list, value) => {
